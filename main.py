@@ -17,8 +17,7 @@ Issues: Python is slow, and these custom maps range from 5 to 30 gigabytes. So, 
 TODO: 
 Implement get_info()
 Implement create_window()
-Add pseudocode for copying files
-Add pseudocode for deleting the files
+Add tracking for which items are selected. Alternatively only let one item be selected.
 """
 
 """
@@ -73,4 +72,34 @@ directory only when they are fully installed.
 def update_window():
     pass
 
+"""
+This function is called by the copy button. It gets a list of selected items and calls the "copy_selected_maps()" function below with
+them as an argument. 
+"""
+def copy_button():
+    pass
 
+"""
+This function should be called by a helper function. It takes in an array of folder names, and for each name, it copies the folder with that name.
+
+There will be an error popup if the file name does not exist.
+"""
+
+def copy_selected_maps():
+    pass
+
+
+"""
+This function is called by the delete button. It gets a list of selected items and calls the "delete_selected_maps()" function below with
+them as an argument. 
+"""
+def copy_button():
+    pass
+
+"""
+This function should be called by a helper function. It takes in an array of folder names, and for each name, it deletes the folder with that name.
+
+There will be an error popup if the file name does not exist.
+"""
+def delete_selected_maps():
+    pass
