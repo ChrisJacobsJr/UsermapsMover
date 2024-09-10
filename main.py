@@ -1,5 +1,6 @@
-# This program is designed to make it easy to sync maps to the Boiii client's folder, and to delete maps from that folder.
 """
+This program is designed to make it easy to sync maps to the Boiii client's folder, and to delete maps from that folder.
+
 Here's the gist of how it will run.
 1. Try to find the steam workshop folder, and the boiii client folder. If it can't, prompt the user for the
 directory locations before letting them copy/transfer anything
@@ -10,45 +11,45 @@ directory locations before letting them copy/transfer anything
 4. When the user is done, they may select maps on the right side to delete them.
 5. The user can close the program at any time.
 
+This file (main.py) serves as the window handler for the program. For file-related operations, see operations.py
 
-Issues: Python is slow, and these custom maps range from 5 to 30 gigabytes. So, we will use system calls so that Windows
-        will copy/delete the files for us. 
 
 TODO: 
 Implement get_info()
 Implement create_window()
 Add tracking for which items are selected. Alternatively only let one item be selected.
+
+Make buttons to pick the locations of the steam workshop and the boiii folder, and let the
+program remember where the folders are so the user only has to input them once.
 """
 
+import tkinter as tk
+
 """
-The purpose of this function is to feed information about the files in the Steam Workshop folder into the window function,
-so that it can be displayed to the user. Called in several places.
+This function should be called when the user presses the refresh button, the copy button, or the delete button. 
+It calls get_info() to update the display with any new information.
+
+Note: The folders seem to appear in the directory only when they are fully installed.
 """
-def get_info():
-    # print("Getting info...")
-    # Get some useful info, and return it. If any entries do not have the expected information, then don't store them.
-    # First, open the "..steamapps\workshop\content\311210" folder in read mode (this does not lock the file on Windows)
-        # Figure out how many maps are in the steam workshop folder
-        
-        # Iterate over each subfolder and make a record for:
-            # The name of the folder itself
-            # The map's total file size
-            # The location of previewimage.png
-            # In workshop.json:
-                # Description
-                # FolderName (map name)
-                # Tags (?)
-                # Title
-    # Close the folder
+def update_window():
     pass
 
-"""
-Open a window for the user to interact with. It will try to make sure that the directories are correct, and if they aren't,
-the program will demand the user to set them before it will function.
-"""
-def create_window():
 
-    # The window should have:
+# Copy button handler 
+def copy_button():
+    pass
+
+#Delete button handler 
+def delete_button():
+    pass
+
+### Make the window
+window = tk.Tk()
+window.title("Usermaps Mover")
+window.geometry("800x400")
+# window.resizable(False, False)
+
+# The window should have:
         # Two boxes (They show information about the two file directories we are concerned about)
             # Entries in each box should be selectable, and the user should be able to click and drag, or shift/ctrl click to multi-select
         # A title bar
@@ -60,46 +61,7 @@ def create_window():
     # Important functionality
         # If someone tries to close the window while copying is taking place, it should cancel the copy.
             # I don't know if I actually need to implement this myself or if this is already how it is with python system calls.
-    pass
-
-"""
-This function should be called by the window when the user presses the refresh button, the copy button, or the delete button. 
-It calls get_info() to update the display with any new information.
-
-I don't think I need to worry about maps being downloaded while this function executes, because they seem to appear in the
-directory only when they are fully installed.
-"""
-def update_window():
-    pass
-
-"""
-This function is called by the copy button. It gets a list of selected items and calls the "copy_selected_maps()" function below with
-them as an argument. 
-"""
-def copy_button():
-    pass
-
-"""
-This function should be called by a helper function. It takes in an array of folder names, and for each name, it copies the folder with that name.
-
-There will be an error popup if the file name does not exist.
-"""
-
-def copy_selected_maps():
-    pass
 
 
-"""
-This function is called by the delete button. It gets a list of selected items and calls the "delete_selected_maps()" function below with
-them as an argument. 
-"""
-def copy_button():
-    pass
-
-"""
-This function should be called by a helper function. It takes in an array of folder names, and for each name, it deletes the folder with that name.
-
-There will be an error popup if the file name does not exist.
-"""
-def delete_selected_maps():
-    pass
+### Run the main loop
+window.mainloop()
