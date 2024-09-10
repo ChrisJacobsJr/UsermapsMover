@@ -15,15 +15,45 @@ This file (main.py) serves as the window handler for the program. For file-relat
 
 
 TODO: 
-Implement get_info()
-Implement create_window()
-Add tracking for which items are selected. Alternatively only let one item be selected.
+#### PHASE 0 ####
+define exactly what the phases mean. Edit the TODO to reflect that.
 
-Make buttons to pick the locations of the steam workshop and the boiii folder, and let the
-program remember where the folders are so the user only has to input them once.
+#### PHASE 1 ####
+### main.py ###
+
+Let the program remember where the folders are so the user only has to input them once (store as text file or something).
+Add the buttons for copy, delete, and refresh.
+
+
+
+### operations.py ###
+
+Implement get_info().
+Implement copying, and deleting.
+
+#### PHASE 2 ####
+### main.py ###
+Add boxes for maps to appear in. They can be just text in the box
+Make it so that the maps in the boxes are selectable.
+
+#### PHASE 3 ####
+### main.py ###
+Make buttons to pick the locations of the steam workshop and the boiii folder using the windows dialog
+Try to guess where these directories are already, indicate if no maps found (incase wrong directory)
+
 """
 
 import tkinter as tk
+
+def workshop_loc_submit():
+    entered_text = workshop_loc.get()
+    print("workshop map: ", entered_text)
+    pass
+
+def usermaps_loc_submit():
+    entered_text = usermaps_loc.get()
+    print("usermaps: ", entered_text)
+    pass
 
 """
 This function should be called when the user presses the refresh button, the copy button, or the delete button. 
@@ -48,6 +78,24 @@ window = tk.Tk()
 window.title("Usermaps Mover")
 window.geometry("800x400")
 # window.resizable(False, False)
+
+## Create some labels:
+# Steam workshop location:
+tk.Label (window, text="Steam Workshop Folder", bg="white", fg="black", font="none 12 bold", ) .grid(row=1, column=0, sticky="w")
+# Usermaps folder location:
+tk.Label (window, text="Usermaps Folder", bg="white", fg="black", font="none 12 bold", ) .grid(row=3, column=0, sticky="w")
+
+## create some text entry boxes
+# Steam workshop location:
+workshop_loc = tk.Entry(window, width=20, bg="white")
+workshop_loc.grid(row=2, column=0, sticky="w")
+# Usermaps folder location:
+usermaps_loc = tk.Entry(window, width=20, bg="white")
+usermaps_loc.grid(row=4, column=0, sticky="w")
+
+## add some submit buttons
+tk.Button(window, text="Submit", width=6, command=workshop_loc_submit) .grid(row=2, column=1, sticky="w")
+tk.Button(window, text="Submit", width=6, command=usermaps_loc_submit) .grid(row=4, column=1, sticky="w")
 
 # The window should have:
         # Two boxes (They show information about the two file directories we are concerned about)
