@@ -14,32 +14,25 @@ directory locations before letting them copy/transfer anything
 This file (main.py) serves as the window handler for the program. For file-related operations, see operations.py
 
 
-TODO: 
-#### PHASE 0 ####
-define exactly what the phases mean. Edit the TODO to reflect that.
+TODO: #### PHASE 1 ####
 
-#### PHASE 1 ####
 ### main.py ###
+1.)
+Currently buttons will print out whatever is in the text box. Change
+the button behavior so that they print out the name of every folder
+in the directory of the input box.
 
-Let the program remember where the folders are so the user only has to input them once (store as text file or something).
-Add the buttons for copy, delete, and refresh.
-
-
+2.)
+Create a function that will take two file directories (string) as
+input, and copy all folders with criteria X (defined below) from the
+first directory to the second one.
+Criteria X: The folder has a file named "workshop.json". In the JSON
+file, it must have this field inside: "Type": "map". (This basically
+restricts the program into using maps, at least until phase 5).
 
 ### operations.py ###
 
-Implement get_info().
-Implement copying, and deleting.
 
-#### PHASE 2 ####
-### main.py ###
-Add boxes for maps to appear in. They can be just text in the box
-Make it so that the maps in the boxes are selectable.
-
-#### PHASE 3 ####
-### main.py ###
-Make buttons to pick the locations of the steam workshop and the boiii folder using the windows dialog
-Try to guess where these directories are already, indicate if no maps found (incase wrong directory)
 
 """
 
