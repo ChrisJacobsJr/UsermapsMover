@@ -1,32 +1,42 @@
-# BOIII Usermaps manager
-### Automates a manual step required when playing custom maps on the BOIII client for Call of Duty Black Ops 3.
+# Boiii Usermaps manager
+### Automates a manual step required when playing custom maps on the Boiii client for Call of Duty Black Ops 3.
 
 The plan is to have easily buildable python code with instructions, as well as an executable file for those who cannot code (If you've come this far, you probably have what it takes).
 <br>It will use tkinter for a GUI.<br><br>
 
 ## Here's the plan so far
-### Phase 0 (we are here)
+### Phase 0
 Define the other phases in detail and set expectations for what should be implemented in each phase.
 ### Phase 1
-#### Barebones functionality. 
-+ Copying and Deleting of the maps will be implemented in this phase. It will be done by typing the map name into the search bar and pushing a submit button.
+#### Barebones functionality. (we are here as of 13 Sep 2024)
++ Copying and Deleting of the maps are implemented. One of the buttons are clicked to copy/delete all of the maps.
++ The ui looks like this: Two text input bars for the folder directories. Two buttons, one for copying everything (from the steam workshop folder) and one for deleting everything (from the usermaps folder).
 ### Phase 2
-#### Quality of Life Features
-+ Here we add two boxes
-    + One for the maps in the steam workshop folder
-    + One for the maps in the usermaps folder
-+ Above the two boxes are a bar for the file path of the folders
-    + The file locations are saved to a text file to be read next time
-+ We have buttons for copying/deleting individually selected maps
+#### Give the user visual feedback
++ Here, three boxes are added:
+    + One to display maps in the steam workshop folder.
+    + One to display maps in the usermaps folder.
+    + One to display information about any map that is selected by clicking it.
++ One button is added:
+    + Rescan for new/removed maps.
 ### Phase 3
-#### Making it polished
-+ Add a button that opens a folder dialog to select each folder
-    + Try to guess where the folders are
+#### Increasing Usability
++ The file path bars are supplemented with a button that opens a menu to select a file (done via Windows file handling).
++ Try to guess where the folders are, when the project is launched for the first time.
++ The file locations are saved persistently for convenience.
++ We can click on the maps in the folder to select them.
+    + shift click and control click will behave in a way that one would expect them to.
++ We have buttons for copying/deleting the selected maps mentioned above.
 ### Phase 4
 #### Exe release
 + Write detailed build instructions
 + Make an executable
-+ Find some way to have persistent data without writing to a txt file
+### Phase 5
+#### Bonus features
++ Check to see if the map in the usermaps folder is out of date (compared to one in the workshop folder)
+    + Notify the user / highlight the map
+    + Copy all button will update the map
+    + Copy one button will say "update map" when selecting a map that is out of date.
 ## Disclaimer
 <br><br><br>
 This is not done yet.<br><br>
