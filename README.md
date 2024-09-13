@@ -9,6 +9,7 @@ I am not affiliated with Activision, Treyarch, Black Ops 3, or any other franchi
 ## Here's the plan so far
 ### Phase 0
 Define the other phases in detail and set expectations for what should be implemented in each phase.
+Anything thought up after this phase will go into phase 5.
 ### Phase 1 (we are here as of 13 Sep 2024)
 #### Barebones functionality. 
 + Copying and Deleting of the maps are implemented. One of the buttons are clicked to copy/delete all of the maps.
@@ -39,3 +40,4 @@ Define the other phases in detail and set expectations for what should be implem
     + Notify the user / highlight the map
     + Copy all button will update the map
     + Copy one button will say "update map" when selecting a map that is out of date.
++ Add support for mods that aren't maps.
