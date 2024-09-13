@@ -16,12 +16,24 @@ This file (main.py) serves as the window handler for the program. For file-relat
 
 TODO: #### PHASE 1 ####
 
-### main.py ###
+### main.py (this file) ###
 1.)
 Currently buttons will print out whatever is in the text box. Change
 the button behavior so that they print out the name of every folder
-in the directory of the input box.
+in the directory of the input box, with "copied" or "deleted", based
+on the button. Also, change the button text to reflect this behavior.
 
+3.)
+Call the function in operations.py (via the copy-all button) that was
+created in step 2, using strings obtained by reading the file
+directory from the text boxes. If necessary, change the text input 
+(file directory) so that it will work with python.
+
+5.)
+Conclude Phase 1
+
+
+### operations.py ###
 2.)
 Create a function that will take two file directories (string) as
 input, and copy all folders with criteria X (defined below) from the
@@ -30,7 +42,11 @@ Criteria X: The folder has a file named "workshop.json". In the JSON
 file, it must have this field inside: "Type": "map". (This basically
 restricts the program into using maps, at least until phase 5).
 
-### operations.py ###
+4.)
+Create a function similar to the one in step 2. It has 2 differences:
+First, it only takes one variable, the directory of the usermaps
+folder. Second, it deletes the folders instead of copying them
+elsewhere.
 
 
 
