@@ -7,8 +7,8 @@ The plan is to have easily buildable python code with instructions, as well as a
 ## Here's the plan so far
 ### Phase 0
 Define the other phases in detail and set expectations for what should be implemented in each phase.
-### Phase 1
-#### Barebones functionality. (we are here as of 13 Sep 2024)
+### Phase 1 (we are here as of 13 Sep 2024)
+#### Barebones functionality. 
 + Copying and Deleting of the maps are implemented. One of the buttons are clicked to copy/delete all of the maps.
 + The ui looks like this: Two text input bars for the folder directories. Two buttons, one for copying everything (from the steam workshop folder) and one for deleting everything (from the usermaps folder).
 ### Phase 2
