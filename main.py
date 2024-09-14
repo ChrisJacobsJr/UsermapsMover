@@ -17,19 +17,20 @@ This file (main.py) serves as the window handler for the program. For file-relat
 TODO: #### PHASE 1 ####
 
 ### main.py (this file) ###
-1.)
+1.) (FINISHED)
 Currently buttons will print out whatever is in the text box. Change
 the button behavior so that they print out the name of every folder
 in the directory of the input box, with "copied" or "deleted", based
 on the button. Also, change the button text to reflect this behavior.
 
-3.)
+3.) (FINISHED)
 Call the function in operations.py (via the copy-all button) that was
 created in step 2, using strings obtained by reading the file
 directory from the text boxes. If necessary, change the text input 
 (file directory) so that it will work with python.
 
-5.) move anything file related to operations.py
+5.) (FINISHED)
+move anything file related to operations.py
 
 6.)
 Conclude Phase 1
@@ -57,71 +58,23 @@ elsewhere.
 import tkinter as tk
 import os
 import json
+import operations   # file operations are handled here
 
-json_file_path = "config.json"
-
-def save_text():
-    data = {
-        "steam_workshop_directory": workshop_loc.get(),
-        "usermaps_directory": usermaps_loc.get()
-    }
-    with open(json_file_path, "w") as file:
-        json.dump(data, file)
-
-def load_text():
-    if os.path.exists(json_file_path):
-        with open(json_file_path, "r") as file:
-            data = json.load(file)
-            workshop_loc.insert(0, data.get("steam_workshop_directory", ""))
-            usermaps_loc.insert(0, data.get("usermaps_directory", ""))
-
-def workshop_loc_copy():
-    entered_text = workshop_loc.get()
-    try:
-        #list all entries in the directory using list comprehension
-        subfolders = [ f.name for f in os.scandir(entered_text) if f.is_dir() ]
-
-        # print the names of the entries
-        for entry in subfolders:
-            print("Folder ", entry, "copied")
-    except Exception as e:
-        print(f"Error: {e}")
-    
-
-def usermaps_loc_delete():
-    entered_text = usermaps_loc.get()
-    try:
-        #list all entries in the directory using list comprehension
-        subfolders = [ f.name for f in os.scandir(entered_text) if f.is_dir() ]
-
-        # print the names of the entries
-        for entry in subfolders:
-            print("Folder ", entry, "deleted")
-    except Exception as e:
-        print(f"Error: {e}")
-
-"""
-This function should be called when the user presses the refresh button, the copy button, or the delete button. 
-It calls get_info() to update the display with any new information.
-
-Note: The folders seem to appear in the directory only when they are fully installed.
-"""
-def update_window():
-    pass
-
-
-# Copy button handler 
+'''
+Event handlers
+'''
 def copy_button():
-    pass
-
-#Delete button handler 
+    operations.workshop_copy(workshop_loc)
 def delete_button():
-    pass
+    operations.usermaps_delete(usermaps_loc)
 
 def on_closing():
-    save_text()
+    operations.save_text(workshop_loc, usermaps_loc)
     window.destroy()
 
+'''
+Window management
+'''
 ### Make the window
 window = tk.Tk()
 window.title("Usermaps Mover")
@@ -142,27 +95,16 @@ workshop_loc.grid(row=2, column=0, sticky="w")
 usermaps_loc = tk.Entry(window, width=20, bg="white")
 usermaps_loc.grid(row=4, column=0, sticky="w")
 
-## add some submit buttons
-tk.Button(window, text="Copy", width=6, command=workshop_loc_copy) .grid(row=2, column=1, sticky="w")
-tk.Button(window, text="Delete", width=6, command=usermaps_loc_delete) .grid(row=4, column=1, sticky="w")
+## add some buttons
+tk.Button(window, text="Copy", width=6, command=copy_button) .grid(row=2, column=1, sticky="w")
+tk.Button(window, text="Delete", width=6, command=delete_button) .grid(row=4, column=1, sticky="w")
 
-# The window should have:
-        # Two boxes (They show information about the two file directories we are concerned about)
-            # Entries in each box should be selectable, and the user should be able to click and drag, or shift/ctrl click to multi-select
-        # A title bar
-        # An icon
-        # Two buttons, one for copying to the boiii directory and one for deleting maps from it.
-        # A side pane that shows the thumbnail, size in gigabytes, description, and other info. 
-            # The description may need to be in a scroll box, depending on if there's limits to how long it can be.
 
-    # Important functionality
-        # If someone tries to close the window while copying is taking place, it should cancel the copy.
-            # I don't know if I actually need to implement this myself or if this is already how it is with python system calls.
+### Initialize the window
+## load in the file directories to the text boxes before the window opens
+operations.load_text(workshop_loc, usermaps_loc)
 
-# load in the file directories to the text boxes before the window opens
-load_text()
-
-# Set the protocol for the window close event
+## Set the protocol for the window close event
 window.protocol("WM_DELETE_WINDOW", on_closing)
 
 ### Run the main loop
