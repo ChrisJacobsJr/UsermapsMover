@@ -29,7 +29,9 @@ created in step 2, using strings obtained by reading the file
 directory from the text boxes. If necessary, change the text input 
 (file directory) so that it will work with python.
 
-5.)
+5.) move anything file related to operations.py
+
+6.)
 Conclude Phase 1
 
 
@@ -53,16 +55,50 @@ elsewhere.
 """
 
 import tkinter as tk
+import os
+import json
 
-def workshop_loc_submit():
+json_file_path = "config.json"
+
+def save_text():
+    data = {
+        "steam_workshop_directory": workshop_loc.get(),
+        "usermaps_directory": usermaps_loc.get()
+    }
+    with open(json_file_path, "w") as file:
+        json.dump(data, file)
+
+def load_text():
+    if os.path.exists(json_file_path):
+        with open(json_file_path, "r") as file:
+            data = json.load(file)
+            workshop_loc.insert(0, data.get("steam_workshop_directory", ""))
+            usermaps_loc.insert(0, data.get("usermaps_directory", ""))
+
+def workshop_loc_copy():
     entered_text = workshop_loc.get()
-    print("workshop map: ", entered_text)
-    pass
+    try:
+        #list all entries in the directory using list comprehension
+        subfolders = [ f.name for f in os.scandir(entered_text) if f.is_dir() ]
 
-def usermaps_loc_submit():
+        # print the names of the entries
+        for entry in subfolders:
+            print("Folder ", entry, "copied")
+    except Exception as e:
+        print(f"Error: {e}")
+    
+
+def usermaps_loc_delete():
     entered_text = usermaps_loc.get()
-    print("usermaps: ", entered_text)
-    pass
+    try:
+        #list all entries in the directory using list comprehension
+        subfolders = [ f.name for f in os.scandir(entered_text) if f.is_dir() ]
+
+        # print the names of the entries
+        for entry in subfolders:
+            print("Folder ", entry, "deleted")
+    except Exception as e:
+        print(f"Error: {e}")
 
 """
 This function should be called when the user presses the refresh button, the copy button, or the delete button. 
@@ -81,6 +117,10 @@ def copy_button():
 #Delete button handler 
 def delete_button():
     pass
+
+def on_closing():
+    save_text()
+    window.destroy()
 
 ### Make the window
 window = tk.Tk()
@@ -103,8 +143,8 @@ usermaps_loc = tk.Entry(window, width=20, bg="white")
 usermaps_loc.grid(row=4, column=0, sticky="w")
 
 ## add some submit buttons
-tk.Button(window, text="Submit", width=6, command=workshop_loc_submit) .grid(row=2, column=1, sticky="w")
-tk.Button(window, text="Submit", width=6, command=usermaps_loc_submit) .grid(row=4, column=1, sticky="w")
+tk.Button(window, text="Copy", width=6, command=workshop_loc_copy) .grid(row=2, column=1, sticky="w")
+tk.Button(window, text="Delete", width=6, command=usermaps_loc_delete) .grid(row=4, column=1, sticky="w")
 
 # The window should have:
         # Two boxes (They show information about the two file directories we are concerned about)
@@ -119,6 +159,11 @@ tk.Button(window, text="Submit", width=6, command=usermaps_loc_submit) .grid(row
         # If someone tries to close the window while copying is taking place, it should cancel the copy.
             # I don't know if I actually need to implement this myself or if this is already how it is with python system calls.
 
+# load in the file directories to the text boxes before the window opens
+load_text()
+
+# Set the protocol for the window close event
+window.protocol("WM_DELETE_WINDOW", on_closing)
 
 ### Run the main loop
 window.mainloop()
