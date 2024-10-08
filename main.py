@@ -64,13 +64,32 @@ import operations   # file operations are handled here
 Event handlers
 '''
 def copy_button():
-    operations.workshop_copy(workshop_loc)
+    text = operations.workshop_copy(workshop_loc)
+
+    clear_instructions()
+    write_to_instructions(text)
 def delete_button():
-    operations.usermaps_delete(usermaps_loc)
+    text = operations.usermaps_delete(usermaps_loc)
+    clear_instructions()
+
+    write_to_instructions(text)
 
 def on_closing():
     operations.save_text(workshop_loc, usermaps_loc)
     window.destroy()
+
+'''
+Misc window functions
+'''
+def write_to_instructions(text):
+    instructions.config(state=tk.NORMAL)
+    instructions.insert(tk.END, text)
+    instructions.config(state=tk.DISABLED)
+
+def clear_instructions():
+    instructions.config(state=tk.NORMAL)
+    instructions.delete(1.0, tk.END)
+    instructions.config(state=tk.DISABLED)
 
 '''
 Window management
@@ -89,16 +108,39 @@ tk.Label (window, text="Usermaps Folder", bg="white", fg="black", font="none 12 
 
 ## create some text entry boxes
 # Steam workshop location:
-workshop_loc = tk.Entry(window, width=20, bg="white")
+workshop_loc = tk.Entry(window, width=60, bg="white")
 workshop_loc.grid(row=2, column=0, sticky="w")
 # Usermaps folder location:
-usermaps_loc = tk.Entry(window, width=20, bg="white")
+usermaps_loc = tk.Entry(window, width=60, bg="white")
 usermaps_loc.grid(row=4, column=0, sticky="w")
 
 ## add some buttons
 tk.Button(window, text="Copy", width=6, command=copy_button) .grid(row=2, column=1, sticky="w")
 tk.Button(window, text="Delete", width=6, command=delete_button) .grid(row=4, column=1, sticky="w")
 
+# add a text box for instructions
+# instructions = tk.Text(window, height=15, width=56, bg="lightgrey")
+# instructions.grid(row=5, column=0, columnspan=2, sticky="w")
+# instructions.insert(tk.END, "Put the file paths of the folders in the respective text\nbars." +
+#                     " Then, press 'Copy' to copy the maps over to the\nusermaps folder, and " +
+#                     "press 'Delete' to delete the maps\nfrom the usermaps folder.")
+# instructions.config(state=tk.DISABLED)
+
+instructions_frame = tk.Frame(window)
+instructions_frame.grid(row=5, column=0, columnspan=2, sticky="w")
+
+instructions_scrollbar = tk.Scrollbar(instructions_frame)
+instructions_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+instructions = tk.Text(instructions_frame, height=15, width=56, bg="lightgrey", yscrollcommand=instructions_scrollbar.set)
+instructions.pack(side=tk.LEFT, fill=tk.BOTH)
+
+instructions_scrollbar.config(command=instructions.yview)
+
+instructions.insert(tk.END, "Put the file paths of the folders in the respective text\nbars." +
+                    " Then, press 'Copy' to copy the maps over to the\nusermaps folder, and " +
+                    "press 'Delete' to delete the maps\nfrom the usermaps folder.")
+instructions.config(state=tk.DISABLED)
 
 ### Initialize the window
 ## load in the file directories to the text boxes before the window opens

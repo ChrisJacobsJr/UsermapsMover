@@ -47,24 +47,30 @@ def get_maps(text_bar):
 
 def workshop_copy(workshop):
     maps = get_maps(workshop)
+    text = ""
     try:
         # print the names of the entries
         for entry in maps:
+            text += "Folder " + entry + " copied\n"
             print("Folder ", entry, "copied")
     except Exception as e:
         print(f"Error: {e}")
+    return text
     
 # TODO: 
 # Make it so that this function deletes the folders.
 
 def usermaps_delete(usermaps):
     maps = get_maps(usermaps)
+    text = ""
     try:
         # print the names of the entries
         for entry in maps:
+            text += "Folder " + entry + " deleted\n"
             print("Folder ", entry, "deleted")
     except Exception as e:
         print(f"Error: {e}")
+    return text
 
 """
 The purpose of this function is to return information about the files in a given folder,
