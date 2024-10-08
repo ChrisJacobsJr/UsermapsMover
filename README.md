@@ -5,6 +5,11 @@ The plan is to have easily buildable python code with instructions, as well as a
 
 I am not affiliated with Activision, Treyarch, Black Ops 3, or any other franchises or copyrights connected to this project.
 
+## October update
+Thinking back, it doesn't really make sense to have this be a fully fledged map manager,
+because Steam Workshop already does that. So, I am considering just making this
+program only copy and delete the maps to the usermaps folder. It will print results
+and errors to a little window in the program, but that will be the extent. 
 
 ## Here's the plan so far
 ### Phase 0
